@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>Atomia export Zone {{ zone }}</h3>
+    <div class="well" style="margin-bottom: 25px;">
+        {{ data|linebreaksbr }}
+    </div>
+    <hr/>
+    <h3>Bind export Zone {{ zone }}</h3>
+    <div class="well" style="margin-bottom: 25px;">
+        {{ bind_data|linebreaksbr }}
+    </div>
+
+{% endblock content %}

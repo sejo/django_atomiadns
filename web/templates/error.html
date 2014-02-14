@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="text-danger">
+            {% if error_message %}
+                {{ error_message }}
+            {% else %}
+                Internal Error. Administrator has been notified
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

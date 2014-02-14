@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>Zones ({{ offset }}/{{ zones.total }})</h3>
+    <div class="container col-lg-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>edit</th>
+                <th>export</th>
+                <th>import</th>
+                <th>import bind</th>
+                <th>delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for zone in zones.zones %}
+                <tr>
+                    <td>{{ zone }}</td>
+                    <td>
+                        <button class="btn-success" onclick="location.href='/edit/{{ zone }}';">edit</button>
+                    </td>
+                    <td>
+                        <button class="btn-success" onclick="location.href='/export/{{ zone }}';">export</button>
+                    </td>
+                    <td>
+                        <button class="btn-success" onclick="location.href='/import/{{ zone }}';">import</button>
+                    </td>
+                    <td>
+                        <button class="btn-success">import bind</button>
+                    </td>
+                    <td>
+                        <button class="btn-danger" onclick="remove_zone('{{ zone }}');">delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="row">
+            {% if offset > 0 %}
+                <button class="button" onclick="location.href='/{{ prev_offset }}'">prev</button>{% endif %}
+            {% if next %}
+                <button class="button" onclick="location.href='/{{ next_offset }}'">next</button>{% endif %}
+        </div>
+        <hr/>
+        <div class="container">
+            <h3>Add Zone</h3>
+
+            <div class="row">
+                <div class="col-lg-2">zone</div>
+                <div class="col-lg-2"><input type="text" name="zone"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">copy from zone</div>
+                <div class="col-lg-2"><input type="text" name="copy_from"></div>
+            </div>
+            <div class="row" style="margin-top: 15px; margin-bottom: 25px;">
+                <div class="col-lg-2">&nbsp;</div>
+                <div class="col-lg-2"><button class="btn-success" onclick="add_zone();">add</button></div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+    <script language="JavaScript" src="{{ STATIC_URL }}js/zones.js"></script>
+{% endblock scripts %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="col-md-4">
+            <form action="/login" method="POST">
+                {% csrf_token %}
+            <div class="row">
+                <h2 class="col-md-12">Login</h2>
+            </div>
+            <div class="row">
+                <div class="float-left col-md-6">
+                    <label for="username">email</label>
+                </div>
+                <div class="float-left col-md-6">
+                    <input id="username" name="username" type="text">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 15px;">
+                <div class="float-left col-md-6">
+                    <label for="password">password</label>
+                </div>
+                <div class="float-left col-md-6">
+                    <input id="password" name="password" type="password">
+                </div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-offset-5">
+                    <input type="submit" value="Login" >
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+
+{% endblock scripts %}

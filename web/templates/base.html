@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    {% block media %}
+    {% endblock media %}
+</head>
+<body>
+<div class="col-lg-2 float-left">
+    <ul class="nav nav-pills nav-stacked" style="margin-top: 25px; height: 100%;">
+        {% block navigation %}
+            <li><a href="/">home</a></li>
+            <li><a href="/about">about</a></li>
+            {% if request.session.logged_in %}
+            <li><a href="/logout">logout</a></li>
+            {% endif %}
+        {% endblock navigation %}
+    </ul>
+</div>
+<div class="col-lg-8 float-left" style="margin-top: 25px;" id="main_block">
+    {% block content %}
+    {% endblock content %}
+</div>
+<script language="JavaScript" src="{{ STATIC_URL }}js/jquery-1.11.0.min.js"></script>
+<script language="JavaScript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script language="JavaScript" src="{{ STATIC_URL }}js/jquery.bootstrap-growl.min.js"></script>
+<script language="JavaScript" src="{{ STATIC_URL }}js/general.js"></script>
+{% block scripts %}
+{% endblock scripts %}
+</body>
+</html>

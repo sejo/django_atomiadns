@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container col-lg-12">
+        <input type="hidden" name="zone" value="{{ zone }}">
+
+        <h3>Zone: {{ zone }}</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>TTL</th>
+                <th>data</th>
+                <th>action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in records %}
+                {% for rec in record.records %}
+                    <tr id="{{ rec.id }}">
+                        <td><input type="text" disabled name='name' value="{{ record.name }}"></td>
+                        <td>
+                            <input type="text" name='type' size="3" value="{{ rec.type }}" onchange="change_record({{ rec.id }}, 'type');">
+                        </td>
+                        <td>
+                            <input type="text" name="ttl" size="3" value="{{ rec.ttl }}" onchange="change_record({{ rec.id }}, 'ttl');">
+                        </td>
+                        <td>
+                            <input type="text" name="rdata" size="60" value="{{ rec.rdata }}" onchange="change_record({{ rec.id }}, 'rdata');">
+                        </td>
+                        <td>
+                            <button class="btn" onclick="remove_record({{ rec.id }});"><span class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+            <tr id="new">
+                <td><input type="text" name='name'></td>
+                <td>
+                    <input type="text" name='type' size="3">
+                </td>
+                <td>
+                    <input type="text" name="ttl" size="3">
+                </td>
+                <td>
+                    <input type="text" name="rdata" size="60">
+                </td>
+                <td>
+                    <button class="btn"><span class="glyphicon glyphicon-plus text-success" onclick="add_record('new');"></span></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
+{% block scripts %}
+    <script language="JavaScript" src="{{ STATIC_URL }}js/zones.js"></script>
+{% endblock scripts %}
