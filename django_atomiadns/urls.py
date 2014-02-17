@@ -14,6 +14,8 @@ urlpatterns = patterns('',
 
                        url(r'^logout', 'django.contrib.auth.views.logout', {'next_page': '/'}),
                        url(r'^about/?$', TemplateView.as_view(template_name='about.html')),
+                       url(r'^change_password/?$', 'web.views.change_password'),
+
                        # main page
                        url(r'^/?(?P<offset>\d+)?/?$', 'web.views.home'),
 

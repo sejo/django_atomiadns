@@ -1,5 +1,6 @@
 import json
 from urllib2 import HTTPError
+from django.contrib.auth.views import logout
 import re
 from django.conf import settings
 from django.shortcuts import render, render_to_response
@@ -135,3 +136,40 @@ def import_zone(request, zone):
                                   "zone": zone
                               },
                               context_instance=RequestContext(request))
+
+
+def change_password(request):
+    if request.method == 'GET':
+        return render_to_response("change_password.html", {}, context_instance=RequestContext(request))
+
+    if not request.session.has_key("logged_in"):
+        return home(request)
+
+    old_password = request.POST.get('old_pass', None)
+    password = request.POST.get('pass', None)
+    conf_password = request.POST.get('conf_pass', None)
+
+    if old_password != request.session.get('password'):
+        return render_to_response("error.html",
+                                  {
+                                      "error_message": "Incorrect old password!"
+                                  },
+                                  context_instance=RequestContext(request))
+
+    if password == conf_password:
+        client = get_client(request.session)
+        res = json.loads(client.EditAccount(request.session.get('username'), password))
+
+        if "error_message" in res:
+            return render_to_response("error.html",
+                                      {
+                                          "error_message": "Server error while changing password."
+                                      },
+                                      context_instance=RequestContext(request))
+        return logout(request, next_page='/')
+    else:
+        return render_to_response("error.html",
+                                  {
+                                      "error_message": "Password and confirmation do not match."
+                                  },
+                                  context_instance=RequestContext(request))
