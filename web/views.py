@@ -62,6 +62,13 @@ def login(request):
         zones = json.loads(s_zones)
         return home(request)
     except HTTPError, e:
+        if request.session.has_key('username'):
+            del request.session['username']
+        if request.session.has_key('password'):
+            del request.session['password']
+        if request.session.has_key('logged_in'):
+            del request.session['logged_in']
+
         return render_to_response("error.html",
                                   {
                                       "error_message": "Code: %s, message: %s" % (e.code, e.reason)
