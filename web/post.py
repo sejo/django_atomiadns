@@ -75,7 +75,11 @@ def add_record(request):
         }
     ]
     try:
-        client.AddDnsRecords(zone, records)
+        res_json = client.AddDnsRecords(zone, records)
+        res = json.loads(res_json)
+        if 'error_message' in res:
+            return error_json(res['error_message'])
+
         return ok_json("Done")
     except HTTPError, e:
         return error_json(e.reason)
