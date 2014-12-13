@@ -148,7 +148,7 @@ def add_zone(request):
         # get our defaults
         try:
             client.AddZone(zone, 3600, settings.ATOMIADNS_DEFAULT_NAMESERVERS[0],
-                           'jochen.sejo-it.be', 10800, 3600, 604800, 86400,
+                           settings.ATOMIADNS_DEFAULT_SOA_EMAIL, 10800, 3600, 604800, 86400,
                            ["%s." % ns for ns in settings.ATOMIADNS_DEFAULT_NAMESERVERS], "default")
             return ok_json("Done")
         except HTTPError, e:

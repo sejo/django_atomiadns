@@ -97,4 +97,5 @@ STATIC_URL = '/static/'
 
 PYATOMIADNS_JSON_URL = 'https://dns.sejo-it.be/atomiadns.json'
 ATOMIADNS_DEFAULT_NAMESERVERS = ['dns1.sejo-it.be', 'dns2.sejo-it.be', 'dns3.sejo-it.be']
+ATOMIADNS_DEFAULT_SOA_EMAIL = 'jochen.sejo-it.be'
 PAGINATION_OFFSET = 10
